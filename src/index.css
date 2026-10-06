@@ -1,0 +1,324 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Dynamic Nature Color Engine (smooth transition every 5-6s) */
+    --nature-primary: #10B981;
+    --nature-secondary: #059669;
+    --nature-glow: rgba(16, 185, 129, 0.35);
+    --nature-soft: rgba(16, 185, 129, 0.12);
+    --nature-border: rgba(16, 185, 129, 0.3);
+
+    /* Dark Mode Defaults */
+    --bg-main: #060810;
+    --bg-surface: #0A0F1E;
+    --card-surface: rgba(14, 20, 36, 0.75);
+    --card-surface-hover: rgba(20, 28, 50, 0.85);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-apple: rgba(255, 255, 255, 0.16);
+    --apple-nav-bg: rgba(10, 15, 28, 0.65);
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+  }
+
+  .light {
+    --bg-main: #F6F8FC;
+    --bg-surface: #EDF2F7;
+    --card-surface: rgba(255, 255, 255, 0.85);
+    --card-surface-hover: rgba(255, 255, 255, 0.98);
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-apple: rgba(0, 0, 0, 0.12);
+    --apple-nav-bg: rgba(255, 255, 255, 0.75);
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    letter-spacing: -0.01em;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+
+  /* Custom sleek scrollbar */
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.25);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 185, 129, 0.5);
+  }
+}
+
+/* ==========================================================
+   AUTHENTIC APPLE IPHONE LIQUID GLASS
+   ========================================================== */
+
+.apple-liquid-glass {
+  background: var(--apple-nav-bg);
+  backdrop-filter: blur(34px) saturate(220%) contrast(105%);
+  -webkit-backdrop-filter: blur(34px) saturate(220%) contrast(105%);
+  border: 1px solid var(--border-apple);
+  box-shadow: 
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.35),
+    0 16px 40px -12px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-nav-pill {
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-nav-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.light .apple-nav-pill:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.apple-nav-pill:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================================
+   DYNAMIC NATURE COLOR ENGINE
+   ========================================================== */
+
+.nature-gradient-text {
+  background: linear-gradient(135deg, var(--nature-primary) 0%, var(--nature-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 2.5s ease-in-out;
+}
+
+.nature-btn,
+.primary-btn {
+  background: linear-gradient(135deg, var(--nature-primary) 0%, var(--nature-secondary) 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 9999px;
+  box-shadow: 0 4px 20px var(--nature-glow);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nature-btn:hover,
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--nature-glow);
+  filter: brightness(1.08);
+}
+
+.nature-btn:active,
+.primary-btn:active {
+  transform: translateY(0px) scale(0.97);
+}
+
+.nature-border-glow {
+  border-color: var(--nature-border);
+  box-shadow: 0 0 25px var(--nature-soft);
+  transition: all 2.5s ease-in-out;
+}
+
+/* ==========================================================
+   BIOME SPECIFIC NATURE COLOR THEMES (CINEMATIC MOVIE BLEND)
+   ========================================================== */
+
+/* Forest Biome (Meghalaya, Western Ghats) */
+.biome-forest {
+  --biome-accent: #10B981;
+  --biome-sub: #059669;
+  --biome-glow: rgba(16, 185, 129, 0.35);
+  --biome-bg: linear-gradient(180deg, rgba(6, 78, 59, 0.12) 0%, rgba(6, 78, 59, 0.02) 100%);
+  --biome-border: rgba(16, 185, 129, 0.3);
+}
+
+/* Beach & Coastal Biome (Kerala, Andaman) */
+.biome-ocean {
+  --biome-accent: #06B6D4;
+  --biome-sub: #0284C7;
+  --biome-glow: rgba(6, 182, 212, 0.35);
+  --biome-bg: linear-gradient(180deg, rgba(2, 132, 199, 0.12) 0%, rgba(2, 132, 199, 0.02) 100%);
+  --biome-border: rgba(6, 182, 212, 0.3);
+}
+
+/* Alpine Mountain Biome (Ladakh, Zanskar, Himalayas) */
+.biome-mountain {
+  --biome-accent: #38BDF8;
+  --biome-sub: #64748B;
+  --biome-glow: rgba(56, 189, 248, 0.35);
+  --biome-bg: linear-gradient(180deg, rgba(30, 41, 59, 0.15) 0%, rgba(30, 41, 59, 0.02) 100%);
+  --biome-border: rgba(56, 189, 248, 0.3);
+}
+
+/* Desert Sandstone Biome (Rajasthan, Thar) */
+.biome-desert {
+  --biome-accent: #F59E0B;
+  --biome-sub: #D97706;
+  --biome-glow: rgba(245, 158, 11, 0.35);
+  --biome-bg: linear-gradient(180deg, rgba(180, 83, 9, 0.12) 0%, rgba(180, 83, 9, 0.02) 100%);
+  --biome-border: rgba(245, 158, 11, 0.3);
+}
+
+/* Spiritual Sacred Biome (Char Dham, Kashi) */
+.biome-spiritual {
+  --biome-accent: #F97316;
+  --biome-sub: #EA580C;
+  --biome-glow: rgba(249, 115, 22, 0.35);
+  --biome-bg: linear-gradient(180deg, rgba(194, 65, 12, 0.12) 0%, rgba(194, 65, 12, 0.02) 100%);
+  --biome-border: rgba(249, 115, 22, 0.3);
+}
+
+/* ==========================================================
+   DOUBLE-BEZEL & LIQUID GLASS CONTAINERS
+   ========================================================== */
+
+.double-bezel {
+  padding: 5px;
+  border-radius: 1.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 12px 45px -12px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.light .double-bezel {
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+.double-bezel-inner {
+  border-radius: calc(1.85rem - 4px);
+  background: var(--card-surface);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.15);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.light .double-bezel-inner {
+  box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.8), 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.glass-panel {
+  background: var(--card-surface);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.light .glass-pill {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.glass-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--nature-border);
+  transform: translateY(-1px);
+}
+
+/* Secondary Frosted Glass CTA */
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  color: var(--text-primary);
+  font-weight: 500;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.light .secondary-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--nature-border);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   ANIMATIONS
+   ========================================================== */
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
+}
+
+.animate-float {
+  animation: floatGentle 6s ease-in-out infinite;
+}
+
+@keyframes kenburns {
+  0% { transform: scale(1.02) translate(0, 0); }
+  50% { transform: scale(1.08) translate(-1%, -1%); }
+  100% { transform: scale(1.02) translate(0, 0); }
+}
+
+.animate-kenburns {
+  animation: kenburns 35s ease-in-out infinite alternate;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
