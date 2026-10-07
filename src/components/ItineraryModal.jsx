@@ -34,10 +34,10 @@ export default function ItineraryModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl animate-in fade-in duration-300">
-      <div className="relative w-full max-w-4xl max-h-[92vh] bg-[var(--card-surface)] border border-[var(--border-apple)] rounded-3xl overflow-hidden shadow-2xl flex flex-col backdrop-blur-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-2xl animate-in fade-in duration-300">
+      <div className="relative w-full max-w-4xl max-h-[94dvh] sm:max-h-[90vh] bg-[var(--card-surface)] border border-[var(--border-apple)] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col backdrop-blur-xl">
         {/* Modal Top Bar */}
-        <div className="relative h-56 sm:h-72 w-full overflow-hidden shrink-0">
+        <div className="relative h-44 sm:h-56 md:h-64 w-full overflow-hidden shrink-0">
           <img
             src={pkg.image}
             alt={pkg.title}
@@ -48,52 +48,52 @@ export default function ItineraryModal({
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-[var(--card-surface)] hover:bg-[var(--card-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-primary)] flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--card-surface)] hover:bg-[var(--card-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-primary)] flex items-center justify-center transition-colors cursor-pointer z-10"
             aria-label="Close Itinerary Modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
           {/* Title & Badge Overlay */}
-          <div className="absolute bottom-6 left-6 right-6">
+          <div className="absolute bottom-3.5 left-3.5 right-3.5 sm:bottom-6 sm:left-6 sm:right-6">
             <span 
-              className="inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-2 shadow-md"
+              className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 shadow-md"
               style={{ backgroundColor: 'var(--nature-primary)', boxShadow: '0 4px 14px var(--nature-glow)' }}
             >
               {pkg.badge} · {pkg.category}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)] leading-tight">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[var(--text-primary)] leading-tight line-clamp-2">
               {pkg.title}
             </h2>
-            <div className="mt-2 flex flex-wrap items-center gap-4 text-xs text-[var(--text-secondary)]">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5" style={{ color: 'var(--nature-primary)' }} />
-                {pkg.state}, {pkg.region} India
+            <div className="mt-1.5 sm:mt-2 flex flex-wrap items-center gap-2 sm:gap-4 text-[10px] sm:text-xs text-[var(--text-secondary)]">
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 shrink-0" style={{ color: 'var(--nature-primary)' }} />
+                {pkg.state}
               </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5" style={{ color: 'var(--nature-primary)' }} />
+              <span className="flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 shrink-0" style={{ color: 'var(--nature-primary)' }} />
                 {pkg.duration}
               </span>
               {pkg.altitude && (
-                <span className="flex items-center gap-1.5">
-                  <Mountain className="w-3.5 h-3.5 text-teal-400" />
-                  Peak Elevation: {pkg.altitude}
+                <span className="flex items-center gap-1">
+                  <Mountain className="w-3.5 h-3.5 text-teal-400 shrink-0" />
+                  {pkg.altitude}
                 </span>
               )}
-              <span className="flex items-center gap-1.5">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                {pkg.rating} ({pkg.reviewsCount} reviews)
+              <span className="flex items-center gap-1">
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 shrink-0" />
+                {pkg.rating} ({pkg.reviewsCount})
               </span>
             </div>
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex items-center border-b border-[var(--border-subtle)] px-6 bg-[var(--card-surface)] shrink-0">
+        {/* Tab Navigation with smooth mobile touch scrolling */}
+        <div className="flex items-center border-b border-[var(--border-subtle)] px-3 sm:px-6 bg-[var(--card-surface)] shrink-0 overflow-x-auto no-scrollbar touch-pan-x whitespace-nowrap">
           <button
             onClick={() => setActiveTab('itinerary')}
             style={activeTab === 'itinerary' ? { borderColor: 'var(--nature-primary)', color: 'var(--nature-primary)' } : {}}
-            className={`py-3.5 px-4 text-xs font-bold transition-all border-b-2 cursor-pointer ${
+            className={`py-2.5 sm:py-3.5 px-3 sm:px-4 text-xs font-bold transition-all border-b-2 cursor-pointer ${
               activeTab === 'itinerary'
                 ? ''
                 : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -104,7 +104,7 @@ export default function ItineraryModal({
           <button
             onClick={() => setActiveTab('inclusions')}
             style={activeTab === 'inclusions' ? { borderColor: 'var(--nature-primary)', color: 'var(--nature-primary)' } : {}}
-            className={`py-3.5 px-4 text-xs font-bold transition-all border-b-2 cursor-pointer ${
+            className={`py-2.5 sm:py-3.5 px-3 sm:px-4 text-xs font-bold transition-all border-b-2 cursor-pointer ${
               activeTab === 'inclusions'
                 ? ''
                 : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -115,7 +115,7 @@ export default function ItineraryModal({
           <button
             onClick={() => setActiveTab('highlights')}
             style={activeTab === 'highlights' ? { borderColor: 'var(--nature-primary)', color: 'var(--nature-primary)' } : {}}
-            className={`py-3.5 px-4 text-xs font-bold transition-all border-b-2 cursor-pointer ${
+            className={`py-2.5 sm:py-3.5 px-3 sm:px-4 text-xs font-bold transition-all border-b-2 cursor-pointer ${
               activeTab === 'highlights'
                 ? ''
                 : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -126,7 +126,7 @@ export default function ItineraryModal({
         </div>
 
         {/* Scrollable Content Body */}
-        <div className="p-6 overflow-y-auto flex-1 text-sm text-[var(--text-secondary)] space-y-6">
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1 text-xs sm:text-sm text-[var(--text-secondary)] space-y-4 sm:space-y-6">
           {activeTab === 'itinerary' && (
             <div className="space-y-6">
               <div className="p-4 rounded-2xl bg-[var(--card-surface-hover)] border border-[var(--border-subtle)] flex items-start gap-3">
@@ -243,29 +243,29 @@ export default function ItineraryModal({
         </div>
 
         {/* Modal Action Footer */}
-        <div className="p-4 sm:p-6 border-t border-[var(--border-subtle)] bg-[var(--card-surface)] shrink-0 flex flex-wrap items-center justify-between gap-4">
+        <div className="p-3.5 sm:p-6 border-t border-[var(--border-subtle)] bg-[var(--card-surface)] shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <span className="text-[10px] uppercase font-bold text-[var(--text-secondary)] block">
+            <span className="text-[9.5px] uppercase font-bold text-[var(--text-secondary)] block">
               Investment per guest
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-extrabold text-[var(--text-primary)]">
+              <span className="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)]">
                 {formatPrice(pkg)}
               </span>
-              <span className="text-xs font-semibold" style={{ color: 'var(--nature-primary)' }}>
-                ({pkg.discountPercent}% Seasonal Saving Applied)
+              <span className="text-[11px] sm:text-xs font-semibold" style={{ color: 'var(--nature-primary)' }}>
+                ({pkg.discountPercent}% Saving Applied)
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
             <a
               href={`https://wa.me/919918001088?text=Hello%20YatraVista!%20I%20am%20interested%20in%20${encodeURIComponent(
                 pkg.title
               )}.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-full text-xs font-semibold secondary-btn flex items-center gap-2"
+              className="px-4 py-2.5 rounded-full text-xs font-semibold secondary-btn flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <Phone className="w-3.5 h-3.5" style={{ color: 'var(--nature-primary)' }} />
               <span>WhatsApp Inquiry</span>
@@ -275,7 +275,7 @@ export default function ItineraryModal({
                 onClose();
                 onOpenBooking(pkg);
               }}
-              className="px-6 py-2.5 rounded-full text-xs font-bold primary-btn flex items-center gap-2 cursor-pointer"
+              className="px-6 py-2.5 rounded-full text-xs font-bold primary-btn flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
             >
               <span>Instant Reservation</span>
               <ArrowUpRight className="w-3.5 h-3.5" />

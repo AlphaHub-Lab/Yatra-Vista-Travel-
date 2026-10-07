@@ -24,15 +24,15 @@ export default function Footer() {
   return (
     <footer className="bg-[var(--bg-main)] border-t border-[var(--border-subtle)] text-[var(--text-secondary)] text-xs transition-colors duration-500">
       {/* Newsletter Pre-Footer Banner with Double-Bezel Architecture */}
-      <div className="border-b border-[var(--border-subtle)] py-16">
+      <div className="border-b border-[var(--border-subtle)] py-10 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="double-bezel shadow-2xl">
-            <div className="double-bezel-inner p-8 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-              <div className="max-w-xl">
+            <div className="double-bezel-inner p-5 sm:p-8 lg:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8">
+              <div className="max-w-xl text-left">
                 <span className="text-[10px] font-bold tracking-[0.25em] uppercase nature-gradient-text block mb-2">
                   The Sovereign India Dispatch
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)] tracking-tight">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[var(--text-primary)] tracking-tight text-balance">
                   Receive Private Flight Schedules & Festival Chronicles
                 </h3>
                 <p className="mt-2 text-xs text-[var(--text-secondary)]">
@@ -50,7 +50,7 @@ export default function Footer() {
                     <span>Welcome to YatraVista Chronicles. Check your inbox for our 2026 Sovereign Guide.</span>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubscribe} className="flex gap-2">
+                  <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5 sm:gap-2">
                     <input
                       type="email"
                       required
@@ -61,7 +61,7 @@ export default function Footer() {
                     />
                     <button
                       type="submit"
-                      className="px-6 py-3 rounded-full text-xs font-bold primary-btn flex items-center gap-1.5 shrink-0 cursor-pointer"
+                      className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-bold primary-btn flex items-center justify-center gap-1.5 shrink-0 cursor-pointer"
                     >
                       <span>Subscribe</span>
                       <Send className="w-3.5 h-3.5" />
@@ -75,10 +75,10 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
           {/* Brand Col */}
-          <div className="lg:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-2 text-left">
             <a href="#" className="flex items-center gap-2.5 group">
               <div 
                 className="w-9 h-9 rounded-2xl flex items-center justify-center shadow-md transition-all duration-[2500ms]"
@@ -111,7 +111,7 @@ export default function Footer() {
           </div>
 
           {/* Expeditions */}
-          <div>
+          <div className="text-left">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] mb-4">
               Expedition Portfolios
             </h4>
@@ -126,7 +126,7 @@ export default function Footer() {
           </div>
 
           {/* Regions */}
-          <div>
+          <div className="text-left">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] mb-4">
               Subcontinent Regions
             </h4>
@@ -141,7 +141,7 @@ export default function Footer() {
           </div>
 
           {/* Standards & Trust */}
-          <div>
+          <div className="text-left">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] mb-4">
               Integrity & Standards
             </h4>
@@ -157,9 +157,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Strip */}
-        <div className="mt-14 pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[var(--text-secondary)] opacity-80">
+        <div className="mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[var(--text-secondary)] opacity-80 text-center sm:text-left">
           <p>© 2026 YatraVista Sovereign Journeys Pvt. Ltd. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-6">
             <span>IATO Active Member</span>
             <span>Ministry of Tourism Approved</span>
             <span>ISO 9001:2015 Certified</span>

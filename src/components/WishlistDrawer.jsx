@@ -23,13 +23,13 @@ export default function WishlistDrawer({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-md animate-in fade-in duration-300">
-      <div className="w-full max-w-md h-full bg-[var(--card-surface)] border-l border-[var(--border-subtle)] p-6 flex flex-col justify-between shadow-2xl animate-in slide-in-from-right duration-300 backdrop-blur-2xl">
+      <div className="w-full max-w-md h-full bg-[var(--card-surface)] border-l border-[var(--border-subtle)] p-4 sm:p-6 flex flex-col justify-between shadow-2xl animate-in slide-in-from-right duration-300 backdrop-blur-2xl">
         {/* Header */}
         <div>
-          <div className="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)]">
+          <div className="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[var(--border-subtle)]">
             <div className="flex items-center gap-2">
-              <Heart className="w-5 h-5" style={{ color: 'var(--nature-primary)', fill: 'var(--nature-primary)' }} />
-              <h3 className="text-base font-bold text-[var(--text-primary)]">
+              <Heart className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: 'var(--nature-primary)', fill: 'var(--nature-primary)' }} />
+              <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)]">
                 Saved Expeditions ({savedPackages.length})
               </h3>
             </div>
@@ -43,30 +43,30 @@ export default function WishlistDrawer({
           </div>
 
           {/* List */}
-          <div className="mt-6 space-y-4 overflow-y-auto max-h-[70vh] pr-1">
+          <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4 overflow-y-auto max-h-[calc(100dvh-170px)] sm:max-h-[68vh] pr-1">
             {savedPackages.length > 0 ? (
               savedPackages.map((pkg) => (
                 <div
                   key={pkg.id}
-                  className="p-3.5 rounded-2xl bg-[var(--card-surface-hover)] border border-[var(--border-subtle)] flex gap-3.5 items-center justify-between hover:border-[var(--nature-border)] transition-colors"
+                  className="p-3 sm:p-3.5 rounded-2xl bg-[var(--card-surface-hover)] border border-[var(--border-subtle)] flex gap-2.5 sm:gap-3.5 items-center justify-between hover:border-[var(--nature-border)] transition-colors"
                 >
                   <img
                     src={pkg.image}
                     alt={pkg.title}
-                    className="w-16 h-16 rounded-xl object-cover shrink-0"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0"
                   />
-                  <div className="flex-1 min-w-0">
-                    <span className="text-[10px] font-bold block uppercase tracking-wider" style={{ color: 'var(--nature-primary)' }}>
+                  <div className="flex-1 min-w-0 pr-1">
+                    <span className="text-[9px] sm:text-[10px] font-bold block uppercase tracking-wider truncate" style={{ color: 'var(--nature-primary)' }}>
                       {pkg.state} · {pkg.duration}
                     </span>
                     <h4 className="text-xs font-bold text-[var(--text-primary)] truncate">
                       {pkg.title}
                     </h4>
-                    <span className="text-xs font-extrabold text-[var(--text-primary)] mt-1 block">
+                    <span className="text-xs font-extrabold text-[var(--text-primary)] mt-0.5 sm:mt-1 block">
                       {formatPrice(pkg)}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-2 shrink-0">
+                  <div className="flex flex-col gap-1.5 sm:gap-2 shrink-0">
                     <button
                       onClick={() => onOpenBooking(pkg)}
                       style={{ backgroundColor: 'var(--nature-primary)' }}
@@ -86,10 +86,10 @@ export default function WishlistDrawer({
                 </div>
               ))
             ) : (
-              <div className="py-16 text-center text-[var(--text-secondary)] space-y-3">
-                <Compass className="w-10 h-10 mx-auto opacity-50" style={{ color: 'var(--nature-primary)' }} />
-                <p className="text-xs">No journeys bookmarked yet.</p>
-                <p className="text-[11px] text-[var(--text-secondary)] opacity-70">
+              <div className="py-12 sm:py-16 text-center text-[var(--text-secondary)] space-y-3 px-2">
+                <Compass className="w-9 h-9 sm:w-10 sm:h-10 mx-auto opacity-50" style={{ color: 'var(--nature-primary)' }} />
+                <p className="text-xs font-medium">No journeys bookmarked yet.</p>
+                <p className="text-[11px] text-[var(--text-secondary)] opacity-70 max-w-xs mx-auto">
                   Tap the heart icon on any expedition card to curate your private travel portfolio.
                 </p>
               </div>
@@ -99,14 +99,14 @@ export default function WishlistDrawer({
 
         {/* Footer */}
         {savedPackages.length > 0 && (
-          <div className="pt-4 border-t border-[var(--border-subtle)]">
+          <div className="pt-3 sm:pt-4 border-t border-[var(--border-subtle)]">
             <button
               onClick={() => {
                 onClose();
                 const el = document.getElementById('planner');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="w-full py-3 rounded-full text-xs font-bold primary-btn flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-2.5 sm:py-3 rounded-full text-xs font-bold primary-btn flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Combine Into Multi-Destination Trip</span>
               <ArrowUpRight className="w-4 h-4" />

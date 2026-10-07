@@ -95,6 +95,25 @@ export default function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Smooth Eye-Catching Scroll Reveal Trigger
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    );
+
+    const elements = document.querySelectorAll('.reveal-on-scroll');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)] selection:bg-[var(--nature-primary)] selection:text-white overflow-x-hidden relative transition-colors duration-500">
       {/* Background Ambient Nature Mesh Orbs (Cycle every 5.5s) */}
@@ -125,59 +144,75 @@ export default function App() {
         />
 
         {/* Trust & Accreditations Banner */}
-        <MarqueeTrust />
+        <div className="reveal-on-scroll">
+          <MarqueeTrust />
+        </div>
 
         {/* Interest: Gapless Bento Grid of Five Archetypes */}
-        <BentoGrid
-          packages={packages}
-          onSelectPackage={(pkg) => setItineraryModalPackage(pkg)}
-        />
+        <div className="reveal-on-scroll">
+          <BentoGrid
+            packages={packages}
+            onSelectPackage={(pkg) => setItineraryModalPackage(pkg)}
+          />
+        </div>
 
         {/* Desire: Curated Expeditions Catalog */}
-        <PackageCatalog
-          packages={packages}
-          currency={currency}
-          wishlist={wishlist}
-          toggleWishlist={toggleWishlist}
-          onOpenItinerary={(pkg) => setItineraryModalPackage(pkg)}
-          onOpenBooking={(pkg) => setBookingModalPackage(pkg)}
-          searchFilter={searchFilter}
-        />
+        <div className="reveal-on-scroll">
+          <PackageCatalog
+            packages={packages}
+            currency={currency}
+            wishlist={wishlist}
+            toggleWishlist={toggleWishlist}
+            onOpenItinerary={(pkg) => setItineraryModalPackage(pkg)}
+            onOpenBooking={(pkg) => setBookingModalPackage(pkg)}
+            searchFilter={searchFilter}
+          />
+        </div>
 
         {/* Geographic Portfolios */}
-        <RegionShowcase
-          destinations={destinations}
-          onSelectRegion={handleSelectRegion}
-        />
+        <div className="reveal-on-scroll">
+          <RegionShowcase
+            destinations={destinations}
+            onSelectRegion={handleSelectRegion}
+          />
+        </div>
 
         {/* Interactive Custom Expedition Estimator */}
-        <CustomTripPlanner currency={currency} />
+        <div className="reveal-on-scroll">
+          <CustomTripPlanner currency={currency} />
+        </div>
 
         {/* Verified Guest Stories */}
-        <Testimonials reviews={reviews} />
+        <div className="reveal-on-scroll">
+          <Testimonials reviews={reviews} />
+        </div>
 
         {/* Knowledge Base FAQs */}
-        <FaqSection faqs={faqs} />
+        <div className="reveal-on-scroll">
+          <FaqSection faqs={faqs} />
+        </div>
       </main>
 
       {/* Action / Information Footer */}
-      <Footer />
+      <div className="reveal-on-scroll">
+        <Footer />
+      </div>
 
       {/* Atmospheric Audio Soundscape Dock (Bottom-Left) */}
       <AmbientSound />
 
       {/* Floating Concierge Action Buttons (Bottom-Right) */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+      <div className="fixed bottom-4 right-3.5 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-3">
         <a
           href="https://wa.me/919918001088?text=Hello%20YatraVista!%20I%20would%20like%20to%20speak%20with%20a%20private%20travel%20curator."
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
+          className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
           aria-label="Direct WhatsApp Concierge"
         >
           <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25" />
-          <MessageCircle className="w-7 h-7 relative z-10" />
-          <span className="absolute right-16 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-[#070B14]/90 backdrop-blur-md border border-white/10 text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl">
+          <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 relative z-10" />
+          <span className="hidden sm:inline-block absolute right-16 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-[#070B14]/90 backdrop-blur-md border border-white/10 text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl">
             Direct Concierge WhatsApp
           </span>
         </a>

@@ -3,34 +3,34 @@ import { Star, ShieldCheck, Quote } from 'lucide-react';
 
 export default function Testimonials({ reviews }) {
   return (
-    <section id="reviews" className="py-24 md:py-36 bg-[var(--bg-main)] text-[var(--text-primary)] relative overflow-hidden transition-colors duration-500">
+    <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-[var(--bg-main)] text-[var(--text-primary)] relative overflow-hidden transition-colors duration-500">
       {/* Subtle ambient lighting synced with nature biome */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full blur-[140px] pointer-events-none transition-all duration-[2500ms]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] lg:w-[700px] h-[300px] sm:h-[350px] rounded-full blur-[120px] sm:blur-[140px] pointer-events-none transition-all duration-[2500ms]"
         style={{ background: 'var(--nature-soft)' }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mb-14 text-left">
-          <span className="text-[11px] font-bold tracking-[0.22em] uppercase nature-gradient-text block mb-2">
+        <div className="max-w-3xl mb-10 sm:mb-14 text-left">
+          <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase nature-gradient-text block mb-2">
             Verified Guest Chronicle
           </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight text-balance">
             Stories From Fellow Voyagers
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[var(--text-secondary)]">
+          <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-[var(--text-secondary)]">
             Over 9,800 pilgrims, adventurers, and couples have entrusted their milestones to our sovereign travel atelier.
           </p>
         </div>
 
         {/* Testimonials Grid with Double-Bezel Framing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {reviews.map((rev) => (
             <div
               key={rev.id}
               className="double-bezel group flex flex-col justify-between"
             >
-              <div className="double-bezel-inner p-6 flex flex-col justify-between h-full">
+              <div className="double-bezel-inner p-5 sm:p-6 flex flex-col justify-between h-full">
                 <div>
                   {/* Rating stars & Quote mark */}
                   <div className="flex items-center justify-between mb-4">

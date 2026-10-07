@@ -144,7 +144,7 @@ export default function CustomTripPlanner({ currency }) {
   };
 
   return (
-    <section id="planner" className="py-24 md:py-36 bg-[var(--bg-main)] text-[var(--text-primary)] relative overflow-hidden transition-colors duration-500">
+    <section id="planner" className="py-16 sm:py-24 md:py-36 bg-[var(--bg-main)] text-[var(--text-primary)] relative overflow-hidden transition-colors duration-500">
       {/* Background ambient lighting syncing with nature biome */}
       <div 
         className="absolute top-1/3 right-1/4 w-[600px] h-[350px] rounded-full blur-[140px] pointer-events-none transition-all duration-[2500ms] opacity-20"
@@ -155,36 +155,36 @@ export default function CustomTripPlanner({ currency }) {
         style={{ background: 'var(--nature-soft)' }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-14">
-          <span className="text-[11px] font-bold tracking-[0.22em] uppercase nature-gradient-text block mb-2">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-14">
+          <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase nature-gradient-text block mb-2">
             Interactive Trip Estimator & Bespoke Atelier
           </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight">
             Design Your Sovereign Indian Odyssey
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[var(--text-secondary)]">
+          <p className="mt-2.5 sm:mt-4 text-xs sm:text-sm md:text-base text-[var(--text-secondary)]">
             Select your dream destinations, preferred tempo, and luxury tier to generate an instant dynamic estimate backed by our master travel curators.
           </p>
         </div>
 
         {confirmation ? (
-          <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-[var(--card-surface)] border border-[var(--nature-border)] text-center shadow-2xl animate-in zoom-in-95 duration-500 backdrop-blur-xl">
+          <div className="max-w-2xl mx-auto p-5 sm:p-8 rounded-3xl bg-[var(--card-surface)] border border-[var(--nature-border)] text-center shadow-2xl animate-in zoom-in-95 duration-500 backdrop-blur-xl">
             <div 
-              className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4 border"
               style={{ background: 'var(--nature-soft)', borderColor: 'var(--nature-border)', color: 'var(--nature-primary)' }}
             >
-              <CheckCircle2 className="w-8 h-8" />
+              <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
             </div>
-            <h3 className="text-2xl font-bold text-[var(--text-primary)]">
+            <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
               Expedition Blueprint Generated
             </h3>
-            <p className="text-xs text-[var(--text-secondary)] mt-2">
+            <p className="text-xs text-[var(--text-secondary)] mt-1.5 sm:mt-2">
               Inquiry Reference:{' '}
               <strong style={{ color: 'var(--nature-primary)' }}>{confirmation.id}</strong>
             </p>
 
-            <div className="my-6 p-6 rounded-2xl bg-[var(--card-surface-hover)] border border-[var(--border-subtle)] text-left space-y-3">
+            <div className="my-5 sm:my-6 p-4 sm:p-6 rounded-2xl bg-[var(--card-surface-hover)] border border-[var(--border-subtle)] text-left space-y-2.5 sm:space-y-3">
               <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                 <span>Guest Name:</span>
                 <strong className="text-[var(--text-primary)]">{confirmation.name}</strong>
@@ -205,7 +205,7 @@ export default function CustomTripPlanner({ currency }) {
                 <span className="text-xs uppercase font-bold" style={{ color: 'var(--nature-primary)' }}>
                   Estimated Investment:
                 </span>
-                <span className="text-2xl font-extrabold text-[var(--text-primary)]">
+                <span className="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)]">
                   {formatPrice(confirmation.estimatedCostINR, confirmation.estimatedCostUSD)}
                 </span>
               </div>
@@ -225,17 +225,17 @@ export default function CustomTripPlanner({ currency }) {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start"
           >
             {/* Left Controls Column with Double-Bezel Framing */}
             <div className="lg:col-span-7 double-bezel">
-              <div className="double-bezel-inner p-6 sm:p-8 space-y-8">
+              <div className="double-bezel-inner p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 {/* 1. Pick Destinations */}
                 <div>
-                  <label className="block text-[11px] uppercase font-bold tracking-wider text-[var(--text-secondary)] mb-3">
+                  <label className="block text-[10px] sm:text-[11px] uppercase font-bold tracking-wider text-[var(--text-secondary)] mb-2.5 sm:mb-3">
                     1. Select Regions & Destinations (Pick multiple)
                   </label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {destinationOptions.map((dest) => {
                       const isSelected = selectedDestinations.includes(dest);
                       return (
@@ -421,31 +421,31 @@ export default function CustomTripPlanner({ currency }) {
 
             {/* Right Summary & Booking Trigger */}
             <div className="lg:col-span-5 double-bezel shadow-2xl">
-              <div className="double-bezel-inner p-6 sm:p-8 flex flex-col justify-between h-full">
+              <div className="double-bezel-inner p-4 sm:p-6 lg:p-8 flex flex-col justify-between h-full">
                 <div>
-                  <span className="text-[11px] font-bold tracking-[0.22em] uppercase nature-gradient-text block">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase nature-gradient-text block">
                     Live Dynamic Cost Estimation
                   </span>
-                  <div className="mt-4 p-5 rounded-2xl bg-[var(--card-surface-hover)] border border-[var(--border-subtle)]">
+                  <div className="mt-3.5 sm:mt-4 p-4 sm:p-5 rounded-2xl bg-[var(--card-surface-hover)] border border-[var(--border-subtle)]">
                     <div className="flex items-baseline justify-between mb-1">
                       <span className="text-xs text-[var(--text-secondary)]">Total Estimated Budget</span>
-                      <span className="text-xs font-semibold" style={{ color: 'var(--nature-primary)' }}>
+                      <span className="text-[11px] sm:text-xs font-semibold" style={{ color: 'var(--nature-primary)' }}>
                         All-Inclusive Package
                       </span>
                     </div>
-                    <div className="text-3xl sm:text-4xl font-black text-[var(--text-primary)]">
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--text-primary)] break-words">
                       {formatPrice(estimatedCostINR, estimatedCostUSD)}
                     </div>
-                    <span className="text-[11px] text-[var(--text-secondary)] mt-1 block">
+                    <span className="text-[10px] sm:text-[11px] text-[var(--text-secondary)] mt-1 block">
                       Covers {durationDays} days for {travelers} travelers under{' '}
                       <strong style={{ color: 'var(--nature-primary)' }}>{budgetTier}</strong> tier.
                     </span>
                   </div>
 
                   {/* Contact Form Details */}
-                  <div className="mt-6 space-y-3.5">
+                  <div className="mt-5 sm:mt-6 space-y-3 sm:space-y-3.5">
                     <div>
-                      <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
+                      <label className="block text-[10px] sm:text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
                         Full Name *
                       </label>
                       <input
@@ -454,13 +454,13 @@ export default function CustomTripPlanner({ currency }) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g. Radhika Mehra"
-                        className="w-full px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors"
+                        className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
+                        <label className="block text-[10px] sm:text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
                           Email Address *
                         </label>
                         <input
@@ -469,11 +469,11 @@ export default function CustomTripPlanner({ currency }) {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="radhika@example.com"
-                          className="w-full px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors"
+                          className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
+                        <label className="block text-[10px] sm:text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
                           Phone / WhatsApp *
                         </label>
                         <input
@@ -482,13 +482,13 @@ export default function CustomTripPlanner({ currency }) {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+91 98100 12345"
-                          className="w-full px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors"
+                          className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
+                      <label className="block text-[10px] sm:text-[11px] font-semibold text-[var(--text-secondary)] mb-1">
                         Special Preferences or Dates (Optional)
                       </label>
                       <textarea
@@ -496,13 +496,13 @@ export default function CustomTripPlanner({ currency }) {
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
                         placeholder="Any specific temple darshan, dietary requirements, or private aircraft requests..."
-                        className="w-full px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors resize-none"
+                        className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-[var(--card-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--nature-primary)] transition-colors resize-none"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[var(--border-subtle)]">
+                <div className="mt-5 sm:mt-6 pt-3.5 sm:pt-4 border-t border-[var(--border-subtle)]">
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -516,7 +516,7 @@ export default function CustomTripPlanner({ currency }) {
                     </span>
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
-                  <div className="mt-3 flex items-center justify-center gap-2 text-[11px] text-[var(--text-secondary)]">
+                  <div className="mt-2.5 sm:mt-3 flex items-center justify-center gap-2 text-[10px] sm:text-[11px] text-[var(--text-secondary)]">
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: 'var(--nature-primary)' }} />
                     <span>Zero Obligation · Free Consultation with Senior Curator</span>
                   </div>

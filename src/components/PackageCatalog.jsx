@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
   Compass,
   Star,
@@ -33,6 +33,29 @@ export default function PackageCatalog({
   const [selectedRegion, setSelectedRegion] = useState('All');
   const [searchQuery, setSearchQuery] = useState(searchFilter?.search || '');
   const [sortBy, setSortBy] = useState('featured');
+
+  const catContainerRef = useRef(null);
+  const [glidingCat, setGlidingCat] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const updateCatIndicator = (target) => {
+    if (!target || !catContainerRef.current) return;
+    const containerRect = catContainerRef.current.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    setGlidingCat({
+      left: targetRect.left - containerRect.left,
+      width: targetRect.width,
+      opacity: 1
+    });
+  };
+
+  useEffect(() => {
+    if (catContainerRef.current) {
+      const activeEl = catContainerRef.current.querySelector('[data-active="true"]');
+      if (activeEl) {
+        updateCatIndicator(activeEl);
+      }
+    }
+  }, [activeCategory]);
 
   const categories = [
     'All',
@@ -132,40 +155,40 @@ export default function PackageCatalog({
   };
 
   return (
-    <section id="expeditions" className="py-24 md:py-36 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="expeditions" className="py-16 sm:py-24 md:py-36 relative">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-5 sm:gap-6">
           <div>
             <span
-              className="text-[11px] font-bold tracking-[0.22em] uppercase block mb-2 transition-colors duration-1000"
+              className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase block mb-2 transition-colors duration-1000"
               style={{ color: currentBiome.primary }}
             >
               Curated Nature Expeditions
             </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
               Master Travel Portfolios
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-zinc-500 dark:text-zinc-400 max-w-xl">
+            <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-xl">
               Each expedition is led by verified local scholars, high-altitude alpine guides, or royal palace concierges with guaranteed VIP access.
             </p>
           </div>
 
-          {/* Quick Search & Sort Bar */}
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative">
+          {/* Quick Search & Sort Bar: Stacks on mobile, inline on tablet/desktop */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto">
+            <div className="relative w-full sm:w-52 md:w-56">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search destination, style..."
-                className="pl-9 pr-8 py-2 text-xs rounded-full bg-black/5 dark:bg-white/[0.05] border border-black/10 dark:border-white/15 text-foreground placeholder-zinc-400 focus:outline-none focus:border-emerald-400 transition-colors w-48 sm:w-56"
+                className="w-full pl-9 pr-8 py-2 text-xs rounded-full bg-black/5 dark:bg-white/[0.05] border border-black/10 dark:border-white/15 text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-zinc-400 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 transition-colors"
               />
               <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -175,39 +198,49 @@ export default function PackageCatalog({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 text-xs rounded-full bg-black/5 dark:bg-white/[0.05] border border-black/10 dark:border-white/15 text-foreground focus:outline-none cursor-pointer"
+              className="w-full sm:w-auto px-4 py-2 text-xs rounded-full bg-white dark:bg-[#0A0F1E] border border-black/10 dark:border-white/15 text-zinc-800 dark:text-zinc-200 focus:outline-none cursor-pointer shadow-sm"
             >
-              <option value="featured" className="bg-[#0B101D] text-white">Featured Expeditions</option>
-              <option value="rating" className="bg-[#0B101D] text-white">Highest Rated</option>
-              <option value="price-asc" className="bg-[#0B101D] text-white">Price: Low to High</option>
-              <option value="price-desc" className="bg-[#0B101D] text-white">Price: High to Low</option>
-              <option value="duration" className="bg-[#0B101D] text-white">Duration</option>
+              <option value="featured" className="bg-white text-zinc-900 dark:bg-[#0B101D] dark:text-white">Featured Expeditions</option>
+              <option value="rating" className="bg-white text-zinc-900 dark:bg-[#0B101D] dark:text-white">Highest Rated</option>
+              <option value="price-asc" className="bg-white text-zinc-900 dark:bg-[#0B101D] dark:text-white">Price: Low to High</option>
+              <option value="price-desc" className="bg-white text-zinc-900 dark:bg-[#0B101D] dark:text-white">Price: High to Low</option>
+              <option value="duration" className="bg-white text-zinc-900 dark:bg-[#0B101D] dark:text-white">Duration</option>
             </select>
           </div>
         </div>
 
-        {/* Category Filter Pills with Dynamic Nature Active State */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
+        {/* Category Filter Pills with Sticky Apple Liquid Morphing Capsule */}
+        <div
+          ref={catContainerRef}
+          className="flex items-center gap-2 overflow-x-auto pb-4 mb-4 sm:mb-6 no-scrollbar touch-pan-x -mx-3.5 px-3.5 sm:mx-0 sm:px-0 relative"
+        >
+          {/* Gliding Liquid Glass Pill Indicator */}
+          <div
+            className="absolute top-0 bottom-4 rounded-full pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)]"
+            style={{
+              left: `${glidingCat.left}px`,
+              width: `${glidingCat.width}px`,
+              opacity: glidingCat.opacity,
+              background: `linear-gradient(135deg, ${currentBiome.primary}, ${currentBiome.secondary})`,
+              boxShadow: `0 4px 16px ${currentBiome.glow}, inset 0 1px 1.5px rgba(255, 255, 255, 0.45)`
+            }}
+          />
+
           {categories.map((cat) => {
             const isActive = activeCategory === cat;
             return (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`apple-nav-pill px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer border ${
+                data-active={isActive}
+                onClick={(e) => {
+                  setActiveCategory(cat);
+                  updateCatIndicator(e.currentTarget);
+                }}
+                className={`relative z-10 px-3.5 sm:px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors duration-200 cursor-pointer border ${
                   isActive
-                    ? 'text-white shadow-md'
-                    : 'bg-black/5 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-300 border-black/5 dark:border-white/10'
+                    ? 'text-white border-transparent'
+                    : 'border-black/5 dark:border-white/10 bg-black/5 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white'
                 }`}
-                style={
-                  isActive
-                    ? {
-                        backgroundColor: currentBiome.primary,
-                        borderColor: currentBiome.primary,
-                        boxShadow: `0 2px 14px ${currentBiome.glow}`
-                      }
-                    : {}
-                }
               >
                 {cat === 'All' ? 'All Expeditions' : cat}
               </button>
@@ -216,13 +249,13 @@ export default function PackageCatalog({
         </div>
 
         {/* Region Sub-Filter */}
-        <div className="flex items-center gap-2 mb-10 text-xs">
-          <span className="text-zinc-400 uppercase tracking-wider font-semibold">Region:</span>
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-8 sm:mb-10 text-xs">
+          <span className="text-zinc-400 uppercase tracking-wider font-semibold mr-1">Region:</span>
           {regions.map((reg) => (
             <button
               key={reg}
               onClick={() => setSelectedRegion(reg)}
-              className={`px-3 py-1 rounded-full transition-colors cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1 rounded-full transition-colors cursor-pointer text-xs ${
                 selectedRegion === reg
                   ? 'font-bold underline underline-offset-4'
                   : 'text-zinc-500 dark:text-zinc-400 hover:text-foreground'
@@ -236,7 +269,7 @@ export default function PackageCatalog({
 
         {/* Package Grid with Double-Bezel Framing & Biome Nature Themes */}
         {filteredPackages.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7">
             {filteredPackages.map((pkg) => {
               const isWishlisted = wishlist.includes(pkg.id);
               const b = getPackageBiome(pkg);
@@ -259,8 +292,8 @@ export default function PackageCatalog({
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 dark:from-[#0B101D] dark:via-transparent dark:to-black/40" />
 
                       {/* Top Badges */}
-                      <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold backdrop-blur-md border ${b.badgeBg}`}>
+                      <div className="absolute top-3.5 left-3.5 right-3.5 sm:top-4 sm:left-4 sm:right-4 flex items-center justify-between">
+                        <span className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold backdrop-blur-md border ${b.badgeBg}`}>
                           {pkg.badge} · {b.name}
                         </span>
                         <button
@@ -268,24 +301,24 @@ export default function PackageCatalog({
                             e.stopPropagation();
                             toggleWishlist(pkg.id);
                           }}
-                          className="w-9 h-9 rounded-full bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all cursor-pointer active:scale-90"
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all cursor-pointer active:scale-90"
                           aria-label="Save to Wishlist"
                         >
                           <Heart
-                            className="w-4 h-4"
+                            className="w-3.5 h-3.5 sm:w-4 sm:h-4"
                             style={isWishlisted ? { fill: b.accent, color: b.accent } : {}}
                           />
                         </button>
                       </div>
 
                       {/* Bottom Metadata bar on image */}
-                      <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white">
-                        <span className="flex items-center gap-1.5 font-medium">
+                      <div className="absolute bottom-2.5 sm:bottom-3 left-3.5 sm:left-4 right-3.5 sm:right-4 flex items-center justify-between text-xs text-white">
+                        <span className="flex items-center gap-1.5 font-medium text-[11px] sm:text-xs">
                           <MapPin className="w-3.5 h-3.5" style={{ color: b.accent }} />
                           {pkg.state}
                         </span>
                         {pkg.altitude && (
-                          <span className="flex items-center gap-1 font-medium bg-black/60 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-white/10 text-[11px]">
+                          <span className="flex items-center gap-1 font-medium bg-black/60 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-white/10 text-[10px] sm:text-[11px]">
                             <Mountain className="w-3 h-3 text-cyan-300" />
                             {pkg.altitude}
                           </span>
@@ -294,15 +327,15 @@ export default function PackageCatalog({
                     </div>
 
                     {/* Body Content */}
-                    <div className="p-6 flex-1 flex flex-col justify-between text-left">
+                    <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between text-left">
                       <div>
                         {/* Rating & Duration */}
-                        <div className="flex items-center justify-between text-xs text-zinc-400 mb-2.5">
-                          <span className="flex items-center gap-1 font-semibold text-foreground">
+                        <div className="flex items-center justify-between text-xs text-zinc-400 mb-2">
+                          <span className="flex items-center gap-1 font-semibold text-foreground text-[11px] sm:text-xs">
                             <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                            {pkg.rating} ({pkg.reviewsCount} verified)
+                            {pkg.rating} ({pkg.reviewsCount})
                           </span>
-                          <span className="flex items-center gap-1 font-medium text-zinc-500 dark:text-zinc-300">
+                          <span className="flex items-center gap-1 font-medium text-zinc-500 dark:text-zinc-300 text-[11px] sm:text-xs">
                             <Clock className="w-3.5 h-3.5" style={{ color: b.accent }} />
                             {pkg.duration}
                           </span>
@@ -311,16 +344,16 @@ export default function PackageCatalog({
                         {/* Title & Subtitle */}
                         <h3
                           onClick={() => onOpenItinerary(pkg)}
-                          className="text-lg font-bold text-foreground transition-colors cursor-pointer line-clamp-1"
+                          className="text-base sm:text-lg font-bold text-foreground transition-colors cursor-pointer line-clamp-1"
                         >
                           {pkg.title}
                         </h3>
-                        <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+                        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">
                           {pkg.subtitle}
                         </p>
 
                         {/* Curated Highlights with Biome Checkmark */}
-                        <div className="mt-4 space-y-1.5 border-t border-black/10 dark:border-white/10 pt-3">
+                        <div className="mt-3.5 space-y-1.5 border-t border-black/10 dark:border-white/10 pt-3">
                           {pkg.highlights.slice(0, 2).map((h, i) => (
                             <div key={i} className="flex items-start gap-2 text-[11px] text-zinc-600 dark:text-zinc-300">
                               <Check className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: b.accent }} />
@@ -331,29 +364,29 @@ export default function PackageCatalog({
                       </div>
 
                       {/* Pricing & Dual Action Buttons */}
-                      <div className="mt-6 pt-4 border-t border-black/10 dark:border-white/10 flex items-center justify-between gap-3">
+                      <div className="mt-5 sm:mt-6 pt-3.5 sm:pt-4 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
                         <div className="flex flex-col text-left">
-                          <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">
-                            All-Inclusive Charter
+                          <span className="text-[9.5px] uppercase font-bold tracking-wider text-zinc-400">
+                            All-Inclusive
                           </span>
-                          <div className="flex items-baseline gap-1.5">
-                            <span className="text-xl font-extrabold text-foreground">
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-lg sm:text-xl font-extrabold text-foreground">
                               {formatPrice(pkg)}
                             </span>
                             <span className="text-[10px] text-zinc-400">/ person</span>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 shrink-0">
                           <button
                             onClick={() => onOpenItinerary(pkg)}
-                            className="px-3.5 py-2 rounded-full text-xs font-semibold secondary-btn cursor-pointer"
+                            className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-semibold secondary-btn cursor-pointer"
                           >
                             Details
                           </button>
                           <button
                             onClick={() => onOpenBooking(pkg)}
-                            className="px-4 py-2 rounded-full text-xs font-bold text-white flex items-center gap-1.5 cursor-pointer shadow-md transition-all hover:brightness-110 active:scale-95"
+                            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-bold text-white flex items-center gap-1.5 cursor-pointer shadow-md transition-all hover:brightness-110 active:scale-95"
                             style={{
                               background: `linear-gradient(135deg, ${b.accent}, ${b.sub})`
                             }}

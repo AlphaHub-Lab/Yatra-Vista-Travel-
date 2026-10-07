@@ -13,15 +13,15 @@ export default function MarqueeTrust() {
   ];
 
   return (
-    <div className="relative py-7 bg-[var(--card-surface)] border-y border-[var(--border-subtle)] overflow-hidden transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-4 mb-3 text-center">
-        <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-[var(--text-secondary)]">
+    <div className="relative py-5 sm:py-7 bg-[var(--card-surface)] border-y border-[var(--border-subtle)] overflow-hidden transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-4 mb-2.5 sm:mb-3 text-center">
+        <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-[var(--text-secondary)]">
           Recognized By Sovereign & Global Aviation Authorities
         </span>
       </div>
 
-      <div className="relative flex overflow-x-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <div className="animate-marquee flex items-center gap-6 py-2 pr-6">
+      <div className="relative flex overflow-x-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] sm:[mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+        <div className="animate-marquee flex items-center gap-4 sm:gap-6 py-1.5 sm:py-2 pr-4 sm:pr-6">
           {partners.concat(partners).map((item, idx) => {
             const Icon = item.icon;
             return (

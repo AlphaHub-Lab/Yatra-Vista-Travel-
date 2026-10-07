@@ -50,37 +50,37 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
   const BiomeIcon = activeBiome.icon;
 
   return (
-    <section id="regions" className="py-24 md:py-36 relative overflow-hidden transition-all duration-1000">
+    <section id="regions" className="py-16 sm:py-24 md:py-36 relative overflow-hidden transition-all duration-1000">
       {/* Background ambient natural light following the active region */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[180px] pointer-events-none transition-all duration-1000 opacity-25"
         style={{ backgroundColor: activeBiome.accent }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mb-12 text-left">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-3xl mb-8 sm:mb-12 text-left">
           <div className="flex items-center gap-2 mb-2">
             <span
               className="w-2 h-2 rounded-full animate-ping"
               style={{ backgroundColor: activeBiome.accent }}
             />
             <span
-              className="text-[11px] font-bold tracking-[0.22em] uppercase transition-colors duration-700"
+              className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase transition-colors duration-700"
               style={{ color: activeBiome.accent }}
             >
               Geographic Portfolios & Climate
             </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
             Explore All Across the Indian Subcontinent
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-zinc-500 dark:text-zinc-400">
+          <p className="mt-2.5 sm:mt-4 text-xs sm:text-sm md:text-base text-zinc-600 dark:text-zinc-400">
             From the frozen trans-Himalayan desert to the tropical Malabar coast, each quadrant of India holds an entirely distinct biosphere, heritage, and climate.
           </p>
         </div>
 
         {/* Region Tabs with Apple Liquid Glass Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar border-b border-black/10 dark:border-white/[0.08]">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3.5 sm:pb-4 mb-6 sm:mb-8 no-scrollbar touch-pan-x -mx-3.5 px-3.5 sm:mx-0 sm:px-0 border-b border-black/10 dark:border-white/[0.08]">
           {destinations.map((dest, idx) => {
             const isTabActive = activeTab === idx;
             const b = regionBiomes[dest.id] || regionBiomes["dest-north"];
@@ -89,7 +89,7 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
               <button
                 key={dest.id}
                 onClick={() => setActiveTab(idx)}
-                className={`apple-nav-pill px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-500 flex items-center gap-2 cursor-pointer border ${
+                className={`apple-nav-pill px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-500 flex items-center gap-2 cursor-pointer border ${
                   isTabActive
                     ? 'text-white shadow-lg'
                     : 'bg-black/5 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-300 border-black/5 dark:border-white/10'
@@ -121,7 +121,7 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
           >
             <div className="double-bezel-inner overflow-hidden grid grid-cols-1 lg:grid-cols-12 transition-all duration-700">
               {/* Visual Column */}
-              <div className="relative lg:col-span-6 min-h-[360px] lg:min-h-[500px] overflow-hidden">
+              <div className="relative lg:col-span-6 min-h-[260px] sm:min-h-[340px] lg:min-h-[500px] overflow-hidden">
                 <img
                   src={current.image}
                   alt={current.name}
@@ -132,13 +132,13 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
                 />
                 
                 {/* Weather & Climate Floating Badge */}
-                <div className="absolute top-6 left-6 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs font-semibold text-white shadow-md">
+                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs font-semibold text-white shadow-md">
                   <Sun className="w-3.5 h-3.5 text-amber-400" />
                   <span>Climate: {current.weather}</span>
                 </div>
 
                 {/* Biome classification chip */}
-                <div className="absolute bottom-6 left-6 right-6 hidden sm:block">
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 hidden sm:block">
                   <span
                     className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md border ${activeBiome.badgeClass}`}
                   >
@@ -149,38 +149,38 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
               </div>
 
               {/* Info Column */}
-              <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between text-left">
+              <div className="lg:col-span-6 p-4 sm:p-8 lg:p-10 flex flex-col justify-between text-left">
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
                     <span
                       className="w-2 h-2 rounded-full animate-pulse"
                       style={{ backgroundColor: activeBiome.accent }}
                     />
                     <span
-                      className="text-xs uppercase font-bold tracking-wider transition-colors duration-700"
+                      className="text-[11px] sm:text-xs uppercase font-bold tracking-wider transition-colors duration-700"
                       style={{ color: activeBiome.accent }}
                     >
                       {current.packageCount} Handcrafted Expeditions Active
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-4xl font-extrabold text-foreground mt-1">
+                  <h3 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-foreground mt-1">
                     {current.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-300 mt-2 font-medium leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-300 mt-1.5 sm:mt-2 font-medium leading-relaxed">
                     {current.tagline}
                   </p>
 
                   {/* States Covered */}
-                  <div className="mt-6">
-                    <span className="text-[11px] uppercase font-bold tracking-wider text-zinc-400 block mb-2.5">
+                  <div className="mt-5 sm:mt-6">
+                    <span className="text-[10px] sm:text-[11px] uppercase font-bold tracking-wider text-zinc-400 block mb-2">
                       States & Territories Included:
                     </span>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {current.states.map((st) => (
                         <span
                           key={st}
-                          className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black/5 dark:bg-white/[0.05] border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-200"
+                          className="px-2.5 sm:px-3.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-black/5 dark:bg-white/[0.05] border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-200"
                         >
                           {st}
                         </span>
@@ -189,11 +189,11 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
                   </div>
 
                   {/* Top Landmarks */}
-                  <div className="mt-6">
-                    <span className="text-[11px] uppercase font-bold tracking-wider text-zinc-400 block mb-2.5">
+                  <div className="mt-5 sm:mt-6">
+                    <span className="text-[10px] sm:text-[11px] uppercase font-bold tracking-wider text-zinc-400 block mb-2">
                       Signature Sanctuaries & Highlights:
                     </span>
-                    <div className="grid grid-cols-2 gap-2.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                       {current.topAttractions.map((att) => (
                         <div
                           key={att}
@@ -210,9 +210,9 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
                   </div>
 
                   {/* Best Season Card */}
-                  <div className="mt-6 p-4 rounded-2xl bg-black/5 dark:bg-white/[0.04] border border-black/10 dark:border-white/10 flex items-center gap-3">
+                  <div className="mt-5 sm:mt-6 p-3.5 sm:p-4 rounded-2xl bg-black/5 dark:bg-white/[0.04] border border-black/10 dark:border-white/10 flex items-center gap-3">
                     <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border"
+                      className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0 border"
                       style={{
                         backgroundColor: activeBiome.accent + '20',
                         borderColor: activeBiome.accent + '40',
@@ -222,24 +222,24 @@ export default function RegionShowcase({ destinations, onSelectRegion }) {
                       <Calendar className="w-4 h-4" />
                     </div>
                     <div className="text-xs">
-                      <span className="text-zinc-400 block font-medium">Optimal Travel Window:</span>
-                      <strong className="text-foreground text-sm">{current.bestTime}</strong>
+                      <span className="text-zinc-400 block font-medium text-[11px]">Optimal Travel Window:</span>
+                      <strong className="text-foreground text-xs sm:text-sm">{current.bestTime}</strong>
                     </div>
                   </div>
                 </div>
 
                 {/* Action Button */}
-                <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-black/10 dark:border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                   <button
                     onClick={() => onSelectRegion(current.name)}
-                    className="pl-6 pr-2 py-2 rounded-full text-xs font-bold text-white flex items-center gap-3 cursor-pointer group shadow-lg transition-all duration-300 hover:brightness-110 active:scale-95"
+                    className="pl-5 sm:pl-6 pr-2 py-2.5 sm:py-2 rounded-full text-xs font-bold text-white flex items-center justify-between sm:justify-start gap-3 cursor-pointer group shadow-lg transition-all duration-300 hover:brightness-110 active:scale-95 w-full sm:w-auto"
                     style={{
                       background: `linear-gradient(135deg, ${activeBiome.accent}, ${activeBiome.sub})`,
                       boxShadow: `0 4px 18px ${activeBiome.glow}`
                     }}
                   >
                     <span>View Expeditions in {current.states[0]}</span>
-                    <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                    <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
                       <ArrowUpRight className="w-3.5 h-3.5 text-white" />
                     </span>
                   </button>
